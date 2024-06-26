@@ -4,7 +4,7 @@ import { Module } from "@/models/module-model";
 import { Testimonial } from "@/models/testimonial-model";
 import { User } from "@/models/user-model";
 
-export async function getAllCourse() {
+export async function getCourseList() {
     const allCourse = await Course.find().populate({
         path: "category",
         model: Category
