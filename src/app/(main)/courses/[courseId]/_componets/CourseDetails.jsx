@@ -16,7 +16,6 @@ const CourseDetails = () => {
                 <p className="mt-3 text-gray-600 text-sm">
                     Master React JS & Next JS
                 </p>
-                {/*  */}
                 <div className="flex sm:items-center gap-5 flex-col sm:flex-row sm:gap-6 md:gap-20 mt-6">
                     <div className="flex items-center gap-2">
                         <img

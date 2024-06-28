@@ -44,8 +44,24 @@ const courseSchema = new Schema({
     quizSet: {
         required: true,
         type: Schema.ObjectId,
-    }
+    },
+    subtitle: {
+        required: true,
+        type: String
+    },
+    learning: {
+        required: true,
+        type: String
+    },
 
+    createdOn: {
+        required: true,
+        type: Date
+    },
+    modifiedOn: {
+        required: true,
+        type: Date
+    }
 })
 
 export const Course = mongoose.models.Course ?? mongoose.model("Course", courseSchema);
