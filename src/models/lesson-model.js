@@ -1,5 +1,4 @@
-import { Description } from "@radix-ui/react-dialog"
-import { Schema } from "mongoose"
+import mongoose, { Schema } from "mongoose"
 const lessonSchema = new Schema({
     title: {
         required: true,

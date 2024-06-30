@@ -1,325 +1,63 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import { BookCheck, Clock10, FileQuestion, NotepadText, Radio, StickyNote, Tv, Video } from "lucide-react";
+import { Book, BookCheck, Clock, Clock10, FileQuestion, NotepadText, Radio, StickyNote, Tv, Video } from "lucide-react";
+import LessonList from "./LessonList";
 
-const CourseDetailsTabTwo = () => {
+const CourseDetailsTabTwo = ({ course }) => {
+    const totalDuration = course?.modules?.reduce((acc, module) => acc + module?.duration, 0);
+    const moduleSlugs = course?.modules?.map((module) => module.slug);
     return (
         <>
-            <div class="flex gap-x-5 items-center justify-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
+
+            <div class="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
                 <span className="flex items-center gap-1.5">
                     <BookCheck className="w-4 h-4" />
-                    12 Chapters
+                    {course?.modules?.length} Chapters
                 </span>
                 <span className="flex items-center gap-1.5">
                     <Clock10 className="w-4 h-4" />
-                    50+ Hours
-                </span>
-                <span className="flex items-center gap-1.5">
-                    <Radio className="w-4 h-4" />4 Live Class
+                    {(totalDuration / 60).toPrecision(2)} Hours
                 </span>
             </div>
-
             {/* contents */}
+
             <Accordion
-                defaultValue={["item-1", "item-2", "item-3"]}
+                defaultValue={moduleSlugs}
                 type="multiple"
                 collapsible
                 className="w-full"
             >
-                <AccordionItem className="border-none" value="item-1">
-                    <AccordionTrigger>Introduction</AccordionTrigger>
-                    <AccordionContent>
-                        {/* header */}
-                        <div class="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
-                            <span className="flex items-center gap-1.5">
-                                <Video className="w-4 h-4" />
-                                12 Lessons
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <NotepadText className="w-4 h-4" />
-                                10 Notes
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <FileQuestion className="w-4 h-4" />
-                                10 Quiz
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <Radio className="w-4 h-4" />1 Live Class
-                            </span>
-                        </div>
-                        {/* header ends */}
-
-                        <div className="space-y-3">
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    What is React ?
+                {
+                    course?.modules?.map((module) => (
+                        <AccordionItem value={module.slug} key={module.id} className="border-none my-2">
+                            <AccordionTrigger className="bg-gray-100 p-4 rounded-md ">
+                                <div>{module.title}</div>
+                                <span className="flex items-center gap-1.5 text-sm">
+                                    <Clock10 className="w-4 h-4" />
+                                    {(totalDuration / 60).toPrecision(2)} Hours ।
+                                    <Book className="w-4 h-4" />
+                                    2 Lessons
+                                </span>
+                            </AccordionTrigger>
+                            <AccordionContent className="p-2">                              
+                                <div className="space-y-3">
+                                    <button
+                                        type="button"
+                                        className={cn(
+                                            "flex flex-col justify-start gap-x-4 gap-y-4 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
+                                        )}
+                                    >
+                                        {
+                                            module?.lessonIds?.map((lessonId) => (
+                                                <LessonList key={lessonId} lessonId={lessonId} />
+                                            ))
+                                        }
+                                    </button>
                                 </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Learn React Basics
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Build A Simple React App
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    React Basic Note
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    Project Requirement Analysis
-                                </div>
-                            </button>
-                            {/* item ends */}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-                <AccordionItem className="border-none" value="item-2">
-                    <AccordionTrigger>Master Next JS</AccordionTrigger>
-                    <AccordionContent>
-                        {/* header */}
-                        <div class="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
-                            <span className="flex items-center gap-1.5">
-                                <Video className="w-4 h-4" />
-                                12 Lessons
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <NotepadText className="w-4 h-4" />
-                                10 Notes
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <FileQuestion className="w-4 h-4" />
-                                10 Quiz
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <Radio className="w-4 h-4" />1 Live Class
-                            </span>
-                        </div>
-                        {/* header ends */}
-
-                        <div className="space-y-3">
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    What is React ?
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Learn React Basics
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Build A Simple React App
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    React Basic Note
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    Project Requirement Analysis
-                                </div>
-                            </button>
-                            {/* item ends */}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-                <AccordionItem className="border-none" value="item-3">
-                    <AccordionTrigger>
-                        Built Ecommerce Using Next.js
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        {/* header */}
-                        <div class="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
-                            <span className="flex items-center gap-1.5">
-                                <Video className="w-4 h-4" />
-                                12 Lessons
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <NotepadText className="w-4 h-4" />
-                                10 Notes
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <FileQuestion className="w-4 h-4" />
-                                10 Quiz
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                                <Radio className="w-4 h-4" />1 Live Class
-                            </span>
-                        </div>
-                        {/* header ends */}
-
-                        <div className="space-y-3">
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    What is React ?
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Learn React Basics
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <Tv size={16} className={cn("text-slate-500")} />
-                                    Build A Simple React App
-                                </div>
-                            </button>
-                            {/* item ends */}
-                            {/* item */}
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    React Basic Note
-                                </div>
-                            </button>                           
-                            <button
-                                type="button"
-                                className={cn(
-                                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500]  transition-all hover:text-slate-600  w-full"
-                                )}
-                            >
-                                <div className="flex items-center gap-x-2">
-                                    <StickyNote
-                                        size={16}
-                                        className={cn("text-slate-500")}
-                                    />
-                                    Project Requirement Analysis
-                                </div>
-                            </button>
-                            {/* item ends */}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))
+                }
             </Accordion>
         </>
     );

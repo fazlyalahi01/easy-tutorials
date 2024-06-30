@@ -2,32 +2,35 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CourseDetailsTabOne from "./CourseDetailsTabOne";
 import CourseDetailsTabThree from "./CourseDetailsTabThree";
 import CourseDetailsTabTwo from "./CourseDetailsTabTwo";
+import { formatTimestampIntoDate } from "@/lib/formatDate";
+import Image from "next/image";
 
-const CourseDetails = () => {
+const CourseDetails = ({ course }) => {
+    console.log(course)
     return (
         <section className="py-8 md:py-12">
             <div className="container">
                 <span className="bg-success px-4 py-0.5 rounded-full text-xs font-medium text-white inline-block">
-                    Development
+                    {course?.category?.title}
                 </span>
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold 2xl:text-5xl mt-3">
-                    Reactive Accelerator
+                    {course?.title}
                 </h3>
-                <p className="mt-3 text-gray-600 text-sm">
-                    Master React JS & Next JS
-                </p>
+                
                 <div className="flex sm:items-center gap-5 flex-col sm:flex-row sm:gap-6 md:gap-20 mt-6">
                     <div className="flex items-center gap-2">
-                        <img
+                        <Image
                             className="w-[40px] h-[40px] rounded-full"
-                            src="https://avatars.githubusercontent.com/u/3633137?v=4"
+                            src={course?.instructor?.profilePicture}
                             alt="sumit saha"
+                            width={40}
+                            height={40}
                         />
-                        <p className="font-bold">Tapas Adhikary</p>
+                        <p className="font-bold">{course?.instructor?.firstName} {course?.instructor?.lastName}</p>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                         <span className="text-success font-semibold">Last Updated: </span>
-                        <span>Feb 22, 2022</span>
+                        <span>{formatTimestampIntoDate(course?.modifiedOn)}</span>
                     </div>
                 </div>
 
@@ -40,13 +43,13 @@ const CourseDetails = () => {
                             <TabsTrigger value="instructor">Instructor</TabsTrigger>
                         </TabsList>
                         <TabsContent value="overview">
-                            <CourseDetailsTabOne />
+                            <CourseDetailsTabOne description={course?.description} learning={course?.learning} />
                         </TabsContent>
                         <TabsContent value="curriculum">
-                            <CourseDetailsTabTwo />
+                            <CourseDetailsTabTwo course={course} />
                         </TabsContent>
                         <TabsContent value="instructor">
-                            <CourseDetailsTabThree />
+                            <CourseDetailsTabThree instructor={course?.instructor} />
                         </TabsContent>
                     </Tabs>
                 </div>

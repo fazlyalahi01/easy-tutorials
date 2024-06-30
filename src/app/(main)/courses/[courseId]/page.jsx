@@ -52,13 +52,12 @@ const SingleCoursePage = async ({ params: { courseId } }) => {
     const courses = await getCategoryList();
     const course = await getCourseById(courseId);
 
-    console.log(course);
     return (
         <>
             <CourseDetailsOverview courseId={courseId} />
-            <CourseDetails />
+            <CourseDetails course={course}  />
             <Testimonials testimonials={course.testimonials} />
-            <RelatedCoure course={course} />
+            <RelatedCoure />
         </>
     );
 };
