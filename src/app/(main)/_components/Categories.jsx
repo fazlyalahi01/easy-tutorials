@@ -6,7 +6,6 @@ import Link from "next/link";
 
 const Categories = async () => {
   const categories = await getCategoryList();
-  console.log(categories, "categories");
   return (
     <section
       id="categories"

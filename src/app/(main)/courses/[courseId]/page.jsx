@@ -1,28 +1,9 @@
-import { SectionTitle } from "@/components/section-title";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { formatPrice } from "@/lib/formatPrice";
-import { cn } from "@/lib/utils";
-import { ArrowRight, BookCheck, BookOpen, CheckCheck, Clock10, FileQuestion, MessageSquare, NotepadText, Presentation, Radio, Star, StickyNote, Tv, UsersRound, Video } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { getCategoryList } from "@/queries/category-queries";
+import CourseDetails from "./_componets/CourseDetails";
 import CourseDetailsOverview from "./_componets/CourseDetailsOverview";
 import RelatedCoure from "./_componets/RelatedCourse";
 import Testimonials from "./_componets/Testimonials";
-import CourseDetails from "./_componets/CourseDetails";
+import { getCourseById } from "@/queries/course-queries";
 const courses = [
     {
         id: 1,
@@ -66,13 +47,18 @@ const courses = [
         thumbnail: "/assets/images/categories/music.jpg",
     },
 ];
-const SingleCoursePage = () => {
+
+const SingleCoursePage = async ({ params: { courseId } }) => {
+    const courses = await getCategoryList();
+    const course = await getCourseById(courseId);
+
+    console.log(course);
     return (
         <>
-            <CourseDetailsOverview />
+            <CourseDetailsOverview courseId={courseId} />
             <CourseDetails />
-            <Testimonials courses={courses} />
-            <RelatedCoure courses={courses} />
+            <Testimonials testimonials={course.testimonials} />
+            <RelatedCoure course={course} />
         </>
     );
 };

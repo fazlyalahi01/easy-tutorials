@@ -1,31 +1,34 @@
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
 import { cn } from "@/lib/utils";
+import { getCourseById } from "@/queries/course-queries";
 import Image from "next/image";
 import Link from "next/link";
 
-const CourseDetailsOverview = () => {
+const CourseDetailsOverview = async ({ courseId }) => {
+    const course = await getCourseById(courseId);
     return (
         <div className="overflow-x-hidden  grainy">
             <section className="pt-12  sm:pt-16 bg-lightBg">
                 <div className="container flex flex-col-reverse md:flex-row md:justify-between py-12">
                     <div className=" mx-auto md:w-[60%] flex flex-col  justify-center pr-12">
 
-                        <h1 className="px-6 text-lg text-gray-600 font-inter">
-                            Master React JS & Next JS
-                        </h1>
-                        <p className="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">
+                        <Link href="#">
+                            <Badge>{course?.category?.title}</Badge>
+                        </Link>
+                        <p className="mt-3 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">
                             <span className="relative inline-flex sm:inline">
                                 <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
-                                <span className="relative">Reactive Accelerator </span>
+                                <span className="relative">{course?.title}</span>
                             </span>
                         </p>
 
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti dolores maiores delectus provident enim ratione dignissimos velit! Aut eius, a optio molestias perferendis sed amet quos labore libero et ex!</p>
+                        <h5 className="text-sm text-primary pt-2 leading-relaxed">{course?.description}</h5>
 
                         <div className="mt-6 flex items-center  flex-wrap gap-3">
                             <Link href="" className={cn(buttonVariants({ size: "lg" }))}>
-                            {formatPrice(49)} । Enroll Now
+                                {formatPrice(49)} । Enroll Now
                             </Link>
                             <Link
                                 href=""
@@ -47,7 +50,7 @@ const CourseDetailsOverview = () => {
                                         className="w-full rounded-lg"
                                         width={768}
                                         height={463}
-                                        src="/assets/images/courses/course_1.png"
+                                        src={`/images/courses/${course?.thumbnail}`}
                                         alt=""
                                     />
                                 </div>
