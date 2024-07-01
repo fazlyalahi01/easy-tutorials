@@ -34,7 +34,7 @@ const CourseDetailsTabTwo = ({ course }) => {
                                 <div>{module.title}</div>
                                 <span className="flex items-center gap-1.5 text-sm">
                                     <Clock10 className="w-4 h-4" />
-                                    {(totalDuration / 60).toPrecision(2)} Hours ।
+                                    {(module?.duration / 60).toPrecision(2)} Hours ।
                                     <Book className="w-4 h-4" />
                                     2 Lessons
                                 </span>
