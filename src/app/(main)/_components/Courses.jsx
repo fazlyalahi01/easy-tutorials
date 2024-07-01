@@ -1,11 +1,8 @@
-import { SectionTitle } from "@/components/section-title";
-import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/formatPrice";
 import { getCourseList } from "@/queries/course-queries";
-import { ArrowRight, ArrowRightIcon, BookOpen } from "lucide-react";
-import Image from "next/image";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import CourseCard from "../courses/_components/CourseCard";
+import { SectionTitle } from "@/components/section-title";
 
 const Courses = async () => {
     const courses = await getCourseList();
