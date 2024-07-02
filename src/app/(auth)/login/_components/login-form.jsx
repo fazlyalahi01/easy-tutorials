@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "@/hooks/useAuth";
 
 export function LoginForm() {
+  const {auth, setAuth} = useAuth();
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -27,8 +29,17 @@ export function LoginForm() {
         },
         body: JSON.stringify({ email, password }),
       })
-      console.log(response)
-      const data = await response.json();
+      const { user } = await response.json();
+      if (user) {
+        setAuth({
+          user: {
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email,
+            role: user.role
+          }
+        })
+      }
       console.log(data)
     } catch (error) {
       console.log(error);
@@ -57,7 +68,7 @@ export function LoginForm() {
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>               
+                <Label htmlFor="password">Password</Label>
               </div>
               <Input
                 id="password"

@@ -6,13 +6,16 @@ export const metadata = {
 import { Toaster } from 'react-hot-toast'
 import '../globals.css'
 import dbConnect from '@/services/dbConnect'
+import { AuthProvider } from '@/providers/authProvider'
 export default async function RootLayout({ children }) {
   await dbConnect()
   return (
     <html lang="en">
       <body>
-        {children}
-        <Toaster />
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )
