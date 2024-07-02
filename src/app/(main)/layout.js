@@ -2,6 +2,7 @@ import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "react-hot-toast";
 import "../globals.css";
+import dbConnect from "@/services/dbConnect";
 const navLinks = [
   {
     title: "Features",
@@ -20,7 +21,9 @@ const navLinks = [
     href: "/docs",
   },
 ];
-const MainLayout = ({ children }) => {
+const MainLayout = async({ children }) => {
+  await dbConnect()
+
   return (
     <html lang="en">
       <body>

@@ -5,7 +5,9 @@ export const metadata = {
 
 import { Toaster } from 'react-hot-toast'
 import '../globals.css'
-export default function RootLayout({ children }) {
+import dbConnect from '@/services/dbConnect'
+export default async function RootLayout({ children }) {
+  await dbConnect()
   return (
     <html lang="en">
       <body>
