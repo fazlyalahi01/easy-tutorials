@@ -12,9 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
+import jwt from "jsonwebtoken";
 
 export function LoginForm() {
-  const {auth, setAuth} = useAuth();
+  const { auth, setAuth } = useAuth();
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -29,15 +30,17 @@ export function LoginForm() {
         },
         body: JSON.stringify({ email, password }),
       })
-      const { user } = await response.json();
-      if (user) {
+      const {token} = await response.json();
+      const decodeVAlue = jwt.decode(token); 
+      if (decodeVAlue) {
         setAuth({
           user: {
-            first_name: user.firstName,
-            last_name: user.lastName,
-            email: user.email,
-            role: user.role
-          }
+            first_name: decodeVAlue.first_name,
+            last_name: decodeVAlue.last_name,
+            email: decodeVAlue.email,
+            role: decodeVAlue.role
+          }, 
+          token
         })
       }
       console.log(data)
@@ -82,12 +85,13 @@ export function LoginForm() {
         </form>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account? <br />{" "}
+          <span>Register as </span>
           <Link href="/register/instructor" className="underline">
-            Register as instructor
+            instructor
           </Link>
           {" or "}
           <Link href="/register/student" className="underline">
-            Register as student
+            student
           </Link>
         </div>
       </CardContent>
