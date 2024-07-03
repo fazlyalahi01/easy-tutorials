@@ -12,18 +12,6 @@ export const AuthProvider = ({ children }) => {
         const parsedAuth = JSON.parse(storedAuth);
         if (parsedAuth?.token) {
             setAuth(parsedAuth);
-            try {
-                if (parsedAuth.token) {
-                    const decodedToken = jwtDecode(parsedAuth.token);
-                    if (decodedToken.exp * 1000 < Date.now()) {
-                        console.log("token expired")
-                        setAuth(null);
-                        localStorage.removeItem("auth");
-                    }
-                }
-            } catch (error) {
-                console.log(error)
-            }
         }
     }, []);
 
@@ -33,15 +21,10 @@ export const AuthProvider = ({ children }) => {
         } else {
             localStorage.removeItem("auth");
         }
-    }, [auth]);
-
-    const SignOut = () => {
-        setAuth(null);
-        localStorage.removeItem("auth");
-    };
+    }, [auth]);    
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, SignOut }}>
+        <AuthContext.Provider value={{ auth, setAuth }}>
             {children}
         </AuthContext.Provider>
     )

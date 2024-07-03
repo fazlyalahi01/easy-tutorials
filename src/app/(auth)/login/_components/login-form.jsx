@@ -13,9 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import jwt from "jsonwebtoken";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const { auth, setAuth } = useAuth();
+  const router = useRouter();
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -30,8 +32,8 @@ export function LoginForm() {
         },
         body: JSON.stringify({ email, password }),
       })
-      const {token} = await response.json();
-      const decodeVAlue = jwt.decode(token); 
+      const { token } = await response.json();
+      const decodeVAlue = jwt.decode(token);
       if (decodeVAlue) {
         setAuth({
           user: {
@@ -39,9 +41,11 @@ export function LoginForm() {
             last_name: decodeVAlue.last_name,
             email: decodeVAlue.email,
             role: decodeVAlue.role
-          }, 
+          },
           token
         })
+
+        router.push("/")
       }
       console.log(data)
     } catch (error) {
