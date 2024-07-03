@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/navigation";
+import cookie from "js-cookie"; 
 
 export function LoginForm() {
   const { auth, setAuth } = useAuth();
@@ -33,6 +34,7 @@ export function LoginForm() {
         body: JSON.stringify({ email, password }),
       })
       const { token } = await response.json();
+      cookie.set('authToken', token, { expires: 7 });
       const decodeVAlue = jwt.decode(token);
       if (decodeVAlue) {
         setAuth({
