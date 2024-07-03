@@ -9,6 +9,11 @@ export async function POST(request) {
 
     try {
         dbConnect();
+    // check if user already exist with this email 
+        const user = await User.findOne({ email });
+        if (user) {
+            return NextResponse.json({message: "User already exists"}, { status: 409 });
+        }
         await User.create({
             firstName,
             lastName,

@@ -58,12 +58,15 @@ export function SignupForm({ accountType }) {
         },
         body: JSON.stringify(userData),
       })
+            
       if (response.status === 201) {
         toast.success("User created successfully. Please login to continue...");
         router.push("/login");
+      }else if (response.status === 409) {
+        toast.error("User already exists with this email");
       }
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
     } finally {
       setLoading(false);
     }
