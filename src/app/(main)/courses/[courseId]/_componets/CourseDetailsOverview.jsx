@@ -1,3 +1,4 @@
+import PaymentButton from "@/components/payment-button";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
@@ -26,10 +27,9 @@ const CourseDetailsOverview = async ({ courseId }) => {
 
                         <h5 className="text-sm text-primary pt-2 leading-relaxed">{course?.description}</h5>
 
-                        <div className="mt-6 flex items-center  flex-wrap gap-3">
-                            <Link href="" className={cn(buttonVariants({ size: "lg" }))}>
-                                {formatPrice(49)} । Enroll Now
-                            </Link>
+                        <div className="mt-6 flex items-center flex-wrap gap-3">
+                           <PaymentButton />
+
                             <Link
                                 href=""
                                 className={cn(

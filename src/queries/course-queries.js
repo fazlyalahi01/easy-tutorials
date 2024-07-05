@@ -59,8 +59,8 @@ export async function getCourseInfoForInstructor(instructorId) {
     )
 
     const totalEnrollments = enrollments.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue
-    });
+        return accumulator + currentValue.length;
+    }, 0);
 
     const testimonials = await Promise.all(
         courses.map(async (course) => {
