@@ -7,8 +7,8 @@ import { getCourseById } from "@/queries/course-queries";
 import Image from "next/image";
 import Link from "next/link";
 
-const CourseDetailsOverview = async ({ courseId }) => {
-    const course = await getCourseById(courseId);
+const CourseDetailsOverview = async ({ course }) => {
+    console.log(course)
     return (
         <div className="overflow-x-hidden  grainy">
             <section className="pt-12  sm:pt-16 bg-lightBg">
@@ -28,7 +28,7 @@ const CourseDetailsOverview = async ({ courseId }) => {
                         <h5 className="text-sm text-primary pt-2 leading-relaxed">{course?.description}</h5>
 
                         <div className="mt-6 flex items-center flex-wrap gap-3">
-                           <PaymentButton />
+                            <PaymentButton asLink={false} course={course} />
 
                             <Link
                                 href=""

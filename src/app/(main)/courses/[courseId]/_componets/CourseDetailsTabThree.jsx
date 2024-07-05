@@ -32,7 +32,7 @@ const CourseDetailsTabThree = async ({ instructor }) => {
                             </li>
                             <li className="flex space-x-3">
                                 <UsersRound className="text-gray-600" />
-                                <div>{totalStudents} Student Learned</div>
+                                <div>{isNaN(totalStudents) ? 0 : Math.floor(totalStudents)} Student Learned</div>
                             </li>
                             <li className="flex space-x-3">
                                 <MessageSquare className="text-gray-600" />
