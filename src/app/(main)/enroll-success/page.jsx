@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 
-const Success = () => {
+const Success = ({searchParams: {session_id, courseId}}) => {
+  if(!session_id){
+    throw new Error("Please provide a valide session_id starts with cs_")
+  }
   return (
     <div className="h-full w-full flex-1 flex flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-6 max-w-[600px] text-center">

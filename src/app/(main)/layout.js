@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast";
 import "../globals.css";
 import dbConnect from "@/services/dbConnect";
 import { AuthProvider } from "@/providers/authProvider";
+import Error from "./error";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 const navLinks = [
   {
     title: "Features",
@@ -36,7 +38,9 @@ const MainLayout = async ({ children }) => {
               </div>
             </header>
             <main className="flex-1 pt-20 flex flex-col">
-              {children}
+              <ErrorBoundary fallback={<Error />}>
+                {children}
+              </ErrorBoundary>
             </main>
             <SiteFooter />
           </div>
