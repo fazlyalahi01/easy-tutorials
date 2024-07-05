@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import jwt from "jwt-decode";
 
 // This function can be marked `async` if using `await` inside
-const privateRoutes = ['/account'];
+const privateRoutes = ['/account', "/enroll-success"];
 
 export function middleware(request) {
   const token = request.cookies.get('authToken');    

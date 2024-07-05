@@ -5,9 +5,6 @@ import { Clock, Tv, Video } from "lucide-react";
 
 const LessonList = async ({ lessonId }) => {
     const lesson = await getLessonById(lessonId);
-
-    console.log(lesson)
-
     return (
         <>
             <div className="flex items-center gap-x-2">

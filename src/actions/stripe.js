@@ -9,6 +9,7 @@ export const createCheckoutSession = async (formData) => {
     const price = formData.get("price");
     const title = formData.get("title");
     const description = formData.get("description");
+    const email = formData.get("email");
 
     const ui_mode = "hosted";
     const origin = headers().get("origin");
@@ -16,6 +17,7 @@ export const createCheckoutSession = async (formData) => {
     const checkoutSession = await stripe.checkout.sessions.create({
         mode: "payment",
         submit_type: "auto",
+        customer_email: email,
         line_items: [
             {
                 quantity: 1,
@@ -30,7 +32,7 @@ export const createCheckoutSession = async (formData) => {
             }
         ],
         ...(ui_mode === "hosted" && {
-            success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${courseId}`,
+            success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${courseId}&email=${email}`,
             cancel_url: `${origin}/courses`,
         }),
         ui_mode,

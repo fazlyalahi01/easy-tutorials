@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CourseDetailsOverview = async ({ course }) => {
-    console.log(course)
     return (
         <div className="overflow-x-hidden  grainy">
             <section className="pt-12  sm:pt-16 bg-lightBg">

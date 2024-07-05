@@ -1,6 +1,5 @@
 'use client'; // Error components must be Client Components
 
-import CustomToast from '@/components/custom-toast';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 

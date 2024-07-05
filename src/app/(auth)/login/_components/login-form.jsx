@@ -49,7 +49,6 @@ export function LoginForm() {
 
         router.push("/")
       }
-      console.log(data)
     } catch (error) {
       console.log(error);
     }

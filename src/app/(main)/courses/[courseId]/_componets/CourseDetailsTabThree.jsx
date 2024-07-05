@@ -3,7 +3,6 @@ import { MessageSquare, Presentation, Star, UsersRound } from "lucide-react";
 import Image from "next/image";
 
 const CourseDetailsTabThree = async ({ instructor }) => {
-    console.log(instructor)
     const {courseCount, totalStudents, totalReviews, avgReview} = await getCourseInfoForInstructor(instructor?._id.toString());
     return (
         <div className="bg-gray-50 rounded-md p-8">
