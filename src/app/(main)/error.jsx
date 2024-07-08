@@ -9,14 +9,13 @@ export default function Error({ error, reset }) {
         console.error(error);
         if (error) {
             // toast.error(error.message);
-            alert(error.message);
         }
     }, [error]);
 
     return (
         <div className='text-center pt-12'>
             <p>Something went wrong. Please check the following error and try again</p>
-            <p className='text-red-500 pb-4'>Error: {error.message}</p>
+            <p className='text-red-500 pb-4'>message: {error?.message}</p>
             <Button onClick={() => window.location.reload()}>Reload Page</Button>
         </div>
     );

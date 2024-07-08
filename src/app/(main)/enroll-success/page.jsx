@@ -60,8 +60,6 @@ const Success = async ({ searchParams: { session_id, courseId, email } }) => {
     ];
 
     const emailSentResponse = await sendEmails(emailsToSend);
-    console.log(emailSentResponse)
-
   }
 
   return (
