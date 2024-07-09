@@ -1,13 +1,12 @@
-import { NextResponse } from 'next/server'
-import jwt from "jwt-decode";
+import { NextResponse } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 const privateRoutes = ['/account', "/enroll-success"];
 
 export function middleware(request) {
-  const token = request.cookies.get('authToken');    
+  const user = request.cookies.get('auth');    
 
-  if (!token && privateRoutes.includes(request.nextUrl.pathname)) {
+  if (!user && privateRoutes.includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 }

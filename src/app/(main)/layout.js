@@ -1,11 +1,11 @@
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
-import { Toaster } from "react-hot-toast";
 import "../globals.css";
 import dbConnect from "@/services/dbConnect";
 import { AuthProvider } from "@/providers/authProvider";
 import Error from "./error";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { Toaster } from "@/components/ui/sonner";
 const navLinks = [
   {
     title: "Features",
@@ -44,7 +44,7 @@ const MainLayout = async ({ children }) => {
             </main>
             <SiteFooter />
           </div>
-          <Toaster />
+          <Toaster richColors position="top-center"/>
         </AuthProvider>
       </body>
     </html>

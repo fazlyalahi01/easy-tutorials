@@ -1,43 +1,44 @@
+"use client"
+import { changePasswordAction } from "@/actions/change-password";
+import CustomPasswordField from "@/components/input/password-field";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
-const PasswordInfo = () => {
-    return (
-        <form>
-							<div className="grid grid-cols-1 gap-5">
-								<div>
-									<Label className="mb-2 block">Old password :</Label>
-									<Input
-										type="password"
-										placeholder="Old password"
-										required=""
-									/>
-								</div>
-								<div>
-									<Label className="mb-2 block">New password :</Label>
-									<Input
-										type="password"
-										placeholder="New password"
-										required=""
-									/>
-								</div>
-								<div>
-									<Label className="mb-2 block">
-										Re-type New password :
-									</Label>
-									<Input
-										type="password"
-										placeholder="Re-type New password"
-										required=""
-									/>
-								</div>
-							</div>
-							{/*end grid*/}
-							<Button className="mt-5" type="submit">
-								Save password
-							</Button>
-						</form>
-    );
+const PasswordInfo = ({email}) => {
+
+	const handleChangePassword = async (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+
+		try {
+			await changePasswordAction(formData, email);
+			toast.success("Password changed successfully");
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
+	
+	return (
+		<form onSubmit={handleChangePassword}>
+			<div className="grid grid-cols-1 gap-5">
+				<CustomPasswordField
+					name="oldPassword"
+					placeholder="Old Password"
+				/>
+				<CustomPasswordField
+					name="newPassword"
+					placeholder="New Password"
+				/>
+				<CustomPasswordField
+					name="retypePassword"
+					placeholder="Retype New Password"
+				/>
+			</div>
+			{/*end grid*/}
+			<Button className="mt-5" type="submit">
+				Save password
+			</Button>
+		</form>
+	);
 }
 export default PasswordInfo;

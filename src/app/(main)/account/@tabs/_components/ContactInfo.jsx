@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const ContactInfo = () => {
+const ContactInfo = async () => {        
     return (
         <form>
             <div className="grid grid-cols-1 gap-5">

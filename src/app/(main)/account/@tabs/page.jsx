@@ -1,18 +1,16 @@
 "use client";
-import { updateProfileAction } from "@/actions/update-profile";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/useAuth";
 import React, { Suspense } from "react";
-import PersonalInfo from "./_components/PersonalInfo";
-import PasswordInfo from "./_components/PasswordInfo";
 import ContactInfo from "./_components/ContactInfo";
+import PasswordInfo from "./_components/PasswordInfo";
+import PersonalInfo from "./_components/PersonalInfo";
+import { useRouter } from "next/navigation";
 
 
 function Profile() {
 	const { auth } = useAuth();
+	const router = useRouter();
+	
 	const email = auth?.user?.email;
 	const [user, setUser] = React.useState({
 		firstName: "",
@@ -51,9 +49,7 @@ function Profile() {
 		<>
 			<div className="p-6 rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900">
 				<h5 className="text-lg font-semibold mb-4">Personal Detail :</h5>
-				<Suspense fallback={<div>Loading...</div>}>
-					<PersonalInfo userInfo={user} email={email} />
-				</Suspense>
+				<PersonalInfo userInfo={user} email={email} />
 				{/*end form*/}
 			</div>
 			<div className="p-6 rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 mt-[30px]">
@@ -67,7 +63,7 @@ function Profile() {
 						<h5 className="text-lg font-semibold mb-4">
 							Change password :
 						</h5>
-						<PasswordInfo />
+						<PasswordInfo email={email}/>
 					</div>
 					{/*end col*/}
 				</div>

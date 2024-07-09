@@ -12,9 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
-import jwt from "jsonwebtoken";
 import { useRouter } from "next/navigation";
-import cookie from "js-cookie"; 
+import { loginAction } from "@/actions/login";
 
 export function LoginForm() {
   const { auth, setAuth } = useAuth();
@@ -22,35 +21,25 @@ export function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
+
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      })
-      const { token } = await response.json();
-      cookie.set('authToken', token, { expires: 7 });
-      const decodeVAlue = jwt.decode(token);
-      if (decodeVAlue) {
+      const user = await loginAction(formData);
+      if (!user) {
+        throw new Error("Invalid credentials");
+      }
+
+      if (user) {
         setAuth({
           user: {
-            first_name: decodeVAlue.first_name,
-            last_name: decodeVAlue.last_name,
-            email: decodeVAlue.email,
-            role: decodeVAlue.role
-          },
-          token
-        })
-
-        router.push("/")
+            name: user.firstName + " " + user.lastName,
+            email: user.email,
+            role: user.role
+          }
+        });
+        router.push("/");
       }
     } catch (error) {
-      console.log(error);
     }
   }
   return (

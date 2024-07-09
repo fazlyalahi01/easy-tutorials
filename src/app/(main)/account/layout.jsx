@@ -2,7 +2,6 @@ import Menu from "./component/account-menu";
 import ProfileInfo from "./component/profile-info";
 
 function Layout({ tabs }) {
-	console.log("inside layout")
 	return (
 		<section className="relative pb-16">
 			<div className="container relative mt-10">

@@ -17,8 +17,9 @@ export async function POST(request) {
         if (!isValid) {
             return NextResponse.json("Invalid credentials", { status: 401 });
         }
-        const token = jwt.sign({ first_name: user.firstName, last_name: user.lastName, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        return NextResponse.json({ message: "Login successful", token }, {
+        
+        // const token = jwt.sign({ first_name: user.firstName, last_name: user.lastName, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        return NextResponse.json({ message: "Login successful", user }, {
             status: 200
         });
     } catch (error) {

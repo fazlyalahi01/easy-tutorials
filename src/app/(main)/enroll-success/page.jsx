@@ -32,8 +32,6 @@ const Success = async ({ searchParams: { session_id, courseId, email } }) => {
   const customerEmail = loggedInUser?.email;
   const productName = course?.title;
 
-  console.log(customerEmail)
-
   if (status === "succeeded") {
     // db insert
     const enrolled = await upsertNewEnrollment(

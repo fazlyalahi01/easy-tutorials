@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { revalidatePath } from "next/cache";
 import React from "react";
+import { toast } from "sonner";
 
 const PersonalInfo = ({ userInfo, email }) => {
     const [infoState, setInfoState] = React.useState({
@@ -28,7 +28,13 @@ const PersonalInfo = ({ userInfo, email }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await updateProfileAction(email, infoState);
+        try {
+            await updateProfileAction(email, infoState);
+            toast.success("Profile updated successfully");
+            // window.location.reload();
+        } catch (error) {
+            toast.error(`Error: ${error.message}`)
+        }
     }
 
     return (

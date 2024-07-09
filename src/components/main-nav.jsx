@@ -16,14 +16,12 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import jsCookie from "js-cookie";
 export function MainNav({ items, children }) {
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
 	const { auth, setAuth, SignOut } = useAuth();
 
 	const handleSignOut = () => {
 		setAuth(null);
-		jsCookie.remove("authToken");
 		localStorage.removeItem("auth");
 	}
 
