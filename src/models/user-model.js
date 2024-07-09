@@ -31,7 +31,7 @@ const userSchema = new Schema({
     },
     socialMedia: {
         required: false,
-        type: Object,
+        type: [String],
     },
     profilePicture: {
         required: false,

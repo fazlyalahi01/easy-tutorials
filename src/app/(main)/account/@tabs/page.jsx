@@ -18,6 +18,8 @@ function Profile() {
 		email: "",
 		bio: "",
 		designation: "",
+		phone: "",
+		socialMedia: [""]
 	});
 	React.useEffect(() => {
 		const fetchUser = async () => {
@@ -31,6 +33,8 @@ function Profile() {
 						email: data?.email,
 						bio: data?.bio,
 						designation: data?.designation,
+						phone: data?.phone,
+						socialMedia: data?.socialMedia,
 					});
 				} else {
 					setError(data.error);
@@ -49,25 +53,22 @@ function Profile() {
 		<>
 			<div className="p-6 rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900">
 				<h5 className="text-lg font-semibold mb-4">Personal Detail :</h5>
-				<PersonalInfo userInfo={user} email={email} />
-				{/*end form*/}
+				<PersonalInfo userInfo={user} email={email} />				
 			</div>
 			<div className="p-6 rounded-md shadow dark:shadow-gray-800 bg-white dark:bg-slate-900 mt-[30px]">
 				<div className="grid lg:grid-cols-2 grid-cols-1 gap-5">
 					<div>
 						<h5 className="text-lg font-semibold mb-4">Contact Info :</h5>
-						<ContactInfo />
-					</div>
-					{/*end col*/}
+						<ContactInfo user={user}/>
+					</div>					
 					<div>
 						<h5 className="text-lg font-semibold mb-4">
 							Change password :
 						</h5>
 						<PasswordInfo email={email}/>
 					</div>
-					{/*end col*/}
-				</div>
-				{/*end row*/}
+					
+				</div>				
 			</div>
 		</>
 	);
