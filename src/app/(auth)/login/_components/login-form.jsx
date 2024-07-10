@@ -53,8 +53,17 @@ export function LoginForm() {
         },
         body: JSON.stringify({ email, password }),
       });
-      console.log(res);
+
+      const {user} = await res.json();
+
       if (res.status === 200) {
+        setAuth({
+              user: {
+                name: user.firstName + " " + user.lastName,
+                email: user.email,
+                role: user.role
+              }
+            });
         toast.success("Login successful");
         router.push("/");
       }
