@@ -1,3 +1,4 @@
+import PaymentButton from "@/components/payment-button";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
@@ -6,8 +7,7 @@ import { getCourseById } from "@/queries/course-queries";
 import Image from "next/image";
 import Link from "next/link";
 
-const CourseDetailsOverview = async ({ courseId }) => {
-    const course = await getCourseById(courseId);
+const CourseDetailsOverview = async ({ course }) => {
     return (
         <div className="overflow-x-hidden  grainy">
             <section className="pt-12  sm:pt-16 bg-lightBg">
@@ -26,10 +26,9 @@ const CourseDetailsOverview = async ({ courseId }) => {
 
                         <h5 className="text-sm text-primary pt-2 leading-relaxed">{course?.description}</h5>
 
-                        <div className="mt-6 flex items-center  flex-wrap gap-3">
-                            <Link href="" className={cn(buttonVariants({ size: "lg" }))}>
-                                {formatPrice(49)} । Enroll Now
-                            </Link>
+                        <div className="mt-6 flex items-center flex-wrap gap-3">
+                            <PaymentButton asLink={false} course={course} />
+
                             <Link
                                 href=""
                                 className={cn(

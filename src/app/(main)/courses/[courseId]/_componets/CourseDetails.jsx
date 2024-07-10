@@ -6,7 +6,6 @@ import { formatTimestampIntoDate } from "@/lib/formatDate";
 import Image from "next/image";
 
 const CourseDetails = ({ course }) => {
-    console.log(course)
     return (
         <section className="py-8 md:py-12">
             <div className="container">

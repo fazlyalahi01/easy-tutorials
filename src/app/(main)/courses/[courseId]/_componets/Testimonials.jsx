@@ -3,7 +3,6 @@ import { SectionTitle } from "@/components/section-title";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const Testimonials = ({ testimonials }) => {
-    console.log(testimonials);
     return (
         <section className="pb-8 md:pb-12 lg:pb-24">
             <div className="container">
@@ -19,7 +18,6 @@ const Testimonials = ({ testimonials }) => {
                     <CarouselContent className="py-4">
 
                         {testimonials.length > 0 ? testimonials?.map((testimonial) => (
-                            console.log(testimonial),
                             <CarouselItem
                                 key={testimonial.id}
                                 className="md:basis-1/2 lg:basis-1/3"

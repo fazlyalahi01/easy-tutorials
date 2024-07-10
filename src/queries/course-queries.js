@@ -5,7 +5,7 @@ import { Testimonial } from "@/models/testimonial-model";
 import { User } from "@/models/user-model";
 import mongoose, { Schema } from "mongoose";
 import { getEnrollmentList } from "./enrollment-queries";
-import { replaceMongoIdInObject } from "@/lib/formatData";
+import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/lib/formatData";
 import { getTestimonialList } from "./testimonial-queries";
 
 export async function getCourseList() {
@@ -21,8 +21,10 @@ export async function getCourseList() {
     }).populate({
         path: "modules",
         model: Module
-    });
-    return allCourse
+    }).lean();
+
+
+    return replaceMongoIdInArray(allCourse);
 }
 
 
@@ -59,8 +61,8 @@ export async function getCourseInfoForInstructor(instructorId) {
     )
 
     const totalEnrollments = enrollments.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue
-    });
+        return accumulator + currentValue.length;
+    }, 0);
 
     const testimonials = await Promise.all(
         courses.map(async (course) => {

@@ -3,7 +3,6 @@ import { MessageSquare, Presentation, Star, UsersRound } from "lucide-react";
 import Image from "next/image";
 
 const CourseDetailsTabThree = async ({ instructor }) => {
-    console.log(instructor)
     const {courseCount, totalStudents, totalReviews, avgReview} = await getCourseInfoForInstructor(instructor?._id.toString());
     return (
         <div className="bg-gray-50 rounded-md p-8">
@@ -32,7 +31,7 @@ const CourseDetailsTabThree = async ({ instructor }) => {
                             </li>
                             <li className="flex space-x-3">
                                 <UsersRound className="text-gray-600" />
-                                <div>{totalStudents} Student Learned</div>
+                                <div>{isNaN(totalStudents) ? 0 : Math.floor(totalStudents)} Student Learned</div>
                             </li>
                             <li className="flex space-x-3">
                                 <MessageSquare className="text-gray-600" />
