@@ -2,7 +2,6 @@ import { User } from "@/models/user-model";
 import dbConnect from "@/services/dbConnect";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 
 export async function POST(request) {
     const body = await request.json();
@@ -18,7 +17,6 @@ export async function POST(request) {
             return NextResponse.json("Invalid credentials", { status: 401 });
         }
         
-        // const token = jwt.sign({ first_name: user.firstName, last_name: user.lastName, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
         return NextResponse.json({ message: "Login successful", user }, {
             status: 200
         });

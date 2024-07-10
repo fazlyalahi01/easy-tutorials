@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { loginAction } from "@/actions/login";
 import { toast } from "sonner";
 
 export function LoginForm() {
@@ -23,26 +22,44 @@ export function LoginForm() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
+    const email = formData.get("email");
+    const password = formData.get("password");
+
 
     try {
-      const user = await loginAction(formData);
-      if (!user) {
-        throw new Error("Invalid credentials");
-      }
 
-      if (user) {
-        setAuth({
-          user: {
-            name: user.firstName + " " + user.lastName,
-            email: user.email,
-            role: user.role
-          }
-        });
+
+      // const user = await loginAction(formData);
+      // if (!user) {
+      //   throw new Error("Invalid credentials");
+      // }
+
+      // if (user) {
+      //   setAuth({
+      //     user: {
+      //       name: user.firstName + " " + user.lastName,
+      //       email: user.email,
+      //       role: user.role
+      //     }
+      //   });
+      //   toast.success("Login successful");
+      //   router.push("/");
+      // }
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      console.log(res);
+      if (res.status === 200) {
         toast.success("Login successful");
         router.push("/");
       }
     } catch (error) {
-      toast.error("Invalid credentials");
+      toast.error(error.message);
     }
   }
   return (

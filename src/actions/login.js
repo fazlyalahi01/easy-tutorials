@@ -1,6 +1,5 @@
 "use server"
 
-import { User } from "@/models/user-model";
 import { getUserByEmail } from "@/queries/user-queries";
 import bcrypt from "bcryptjs";
 
