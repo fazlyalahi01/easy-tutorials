@@ -9,20 +9,16 @@ import { Toaster } from "@/components/ui/sonner";
 const navLinks = [
   {
     title: "Features",
-    href: "/#features",
+    href: "/features",
   },
   {
-    title: "Pricing",
-    href: "/pricing",
+    title: "Browse Courses",
+    href: "/courses",
   },
   {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Documentation",
-    href: "/docs",
-  },
+    title: "Contact",
+    href: "/contact",
+  }
 ];
 const MainLayout = async ({ children }) => {
   await dbConnect()
@@ -44,7 +40,7 @@ const MainLayout = async ({ children }) => {
             </main>
             <SiteFooter />
           </div>
-          <Toaster richColors position="top-center"/>
+          <Toaster richColors position="top-center" />
         </AuthProvider>
       </body>
     </html>

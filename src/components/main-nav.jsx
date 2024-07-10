@@ -32,7 +32,7 @@ export function MainNav({ items, children }) {
 					<Logo />
 				</Link>
 				{items?.length ? (
-					<nav className="hidden gap-6 lg:flex">
+					<nav className="hidden gap-6 lg:flex text-center ">
 						{items?.map((item, index) => (
 							<Link
 								key={index}
