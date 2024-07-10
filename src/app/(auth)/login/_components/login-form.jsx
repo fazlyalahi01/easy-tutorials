@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/login";
+import { toast } from "sonner";
 
 export function LoginForm() {
   const { auth, setAuth } = useAuth();
@@ -37,9 +38,11 @@ export function LoginForm() {
             role: user.role
           }
         });
+        toast.success("Login successful");
         router.push("/");
       }
     } catch (error) {
+      toast.error("Invalid credentials");
     }
   }
   return (
@@ -70,6 +73,7 @@ export function LoginForm() {
               <Input
                 id="password"
                 name="password"
+                placeholder="••••••••"
                 type="password" required />
             </div>
             <Button type="submit" className="w-full">
