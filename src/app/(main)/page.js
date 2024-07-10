@@ -1,4 +1,4 @@
-import Categories from "./_components/categories";
+import Categories from "./_components/Categories";
 import Courses from "./_components/Courses";
 import Hero from "./_components/Hero";
 
