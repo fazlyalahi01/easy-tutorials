@@ -1,4 +1,5 @@
-import { Badge, BookOpen } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen } from "lucide-react";
 import Image from "next/image";
 
 const EnrolledCourseCard = () => {
@@ -31,7 +32,7 @@ const EnrolledCourseCard = () => {
                             Total Modules: 10
                         </p>
                         <p className="text-md md:text-sm font-medium text-slate-700">
-                            Completed Modules <Badge variant="success">05</Badge>
+                            Completed Module <Badge variant="success">500</Badge>
                         </p>
                     </div>
                     <div className="flex items-center justify-between mt-2">

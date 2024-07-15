@@ -3,7 +3,7 @@ import Courses from "./_components/Courses";
 import Hero from "./_components/Hero";
 
 
-const HomePage = () => {
+const MainHome = () => {
   return (
     <>
       <Hero />
@@ -12,4 +12,4 @@ const HomePage = () => {
     </>
   );
 };
-export default HomePage;
+export default MainHome;
